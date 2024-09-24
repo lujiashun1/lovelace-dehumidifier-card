@@ -430,7 +430,7 @@ export default class ThermostatUI {
     if (this._timeoutHandlerMode) clearTimeout(this._timeoutHandlerMode);
     hass.callService('humidifier', 'set_mode', {
       entity_id: this._config.entity,
-      hvac_mode: mode,
+      mode: mode,
     });
     this._modes_dialog.className = "dialog modes " + mode + " pending";
     this._timeoutHandlerMode = setTimeout(() => {
