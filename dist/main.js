@@ -10,21 +10,20 @@ class DehumidifierCard extends HTMLElement {
     const config = this._config;
     const entity = hass.states[config.entity];
     if(!entity)return;
-    let ambient_temperature = entity.attributes.current_temperature || 0;
-    if (config.ambient_temperature && hass.states[config.ambient_temperature])
-      ambient_temperature = hass.states[config.ambient_temperature].state;
-    let hvac_state = entity.state;
+    let ambient_humidity = entity.attributes.current_humidity || 0;
+    
+    let hvac_state = entity.attributes.mode;
     
     const new_state = {
       entity: entity,
-      min_value: entity.attributes.min_temp,
-      max_value: entity.attributes.max_temp,
-      ambient_temperature: ambient_temperature,
-      target_temperature: entity.attributes.temperature,
+      min_value: entity.attributes.min_humidity,
+      max_value: entity.attributes.max_humidity,
+      ambient_temperature: ambient_humidity,
+      target_temperature: entity.attributes.humidity,
       target_temperature_low: entity.attributes.target_temp_low,
       target_temperature_high: entity.attributes.target_temp_high,
       hvac_state: entity.state,
-      hvac_modes:entity.attributes.hvac_modes,
+      hvac_modes:entity.attributes.available_modes,
       preset_mode: entity.attributes.preset_mode,
       away: (entity.attributes.away_mode == 'on' ? true : false)
     }
