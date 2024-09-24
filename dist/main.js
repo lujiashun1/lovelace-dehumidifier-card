@@ -84,7 +84,7 @@ class DehumidifierCard extends HTMLElement {
 
   setConfig(config) {
     // Check config
-    if (!config.entity && config.entity.split(".")[0] === 'climate') {
+    if (!config.entity && config.entity.split(".")[0] === 'humidifier') {
       throw new Error('Please define an entity');
     }
 
