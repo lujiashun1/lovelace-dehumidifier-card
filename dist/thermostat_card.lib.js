@@ -162,49 +162,25 @@ export default class ThermostatUI {
       this._updateTemperatureSlot(tick_label[1], 8, `temperature_slot_2`);
 
       switch (this.hvac_state) {
-        case 'dry':
-          this._load_icon(this.hvac_state, 'water-percent');
+        case 'Smart':
+          this._load_icon(this.hvac_state, 'alpha-a-circle-outline');
           break;
-        case 'fan_only':
-          this._load_icon(this.hvac_state, 'fan');
+        case 'Sleep':
+          this._load_icon(this.hvac_state, 'power-sleep');
           break;
-        case 'cool':
-          this._load_icon(this.hvac_state, 'snowflake');
+        case 'Clothes Drying':
+          this._load_icon(this.hvac_state, 'tshirt-crew');
 
           if (target_index <= ambient_index) {
             from = target_index;
             to = ambient_index;
           }
           break;
-        case 'heat':
-          this._load_icon(this.hvac_state, 'fire');
-
-          if (target_index >= ambient_index) {
-            from = ambient_index;
-            to = target_index;
-          }
-          break;
-        case 'heat_cool':
-          this._load_icon(this.hvac_state, 'sync');
-
-          if (target_index >= ambient_index) {
-            from = ambient_index;
-            to = target_index;
-          }
-          break;
-        case 'auto':
-          this._load_icon(this.hvac_state, 'atom');
-
-          if (target_index >= ambient_index) {
-            from = ambient_index;
-            to = target_index;
-          }
-          break;
-        case 'off':
+        case 'Off':
           this._load_icon(this.hvac_state, 'power');
           break;
         default:
-          this._load_icon('more', 'dots-horizontal');
+          this._load_icon('more', 'progress-question');
       }
     }
 
