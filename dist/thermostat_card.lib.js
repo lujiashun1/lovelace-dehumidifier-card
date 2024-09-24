@@ -163,13 +163,13 @@ export default class ThermostatUI {
 
       switch (this.hvac_state) {
         case 'Smart':
-          this._load_icon(this.hvac_state, 'alpha-a-circle-outline');
+          this._load_icon('cool', 'alpha-a-circle-outline');
           break;
         case 'Sleep':
-          this._load_icon(this.hvac_state, 'power-sleep');
+          this._load_icon('dry', 'power-sleep');
           break;
         case 'Clothes Drying':
-          this._load_icon(this.hvac_state, 'tshirt-crew');
+          this._load_icon('heat', 'tshirt-crew');
 
           if (target_index <= ambient_index) {
             from = target_index;
@@ -177,7 +177,7 @@ export default class ThermostatUI {
           }
           break;
         case 'Off':
-          this._load_icon(this.hvac_state, 'power');
+          this._load_icon('off', 'power');
           break;
         default:
           this._load_icon('more', 'progress-question');
