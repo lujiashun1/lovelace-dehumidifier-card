@@ -22,7 +22,7 @@ class DehumidifierCard extends HTMLElement {
       target_temperature: entity.attributes.humidity,
       target_temperature_low: entity.attributes.target_temp_low,
       target_temperature_high: entity.attributes.target_temp_high,
-      hvac_state: entity.state,
+      hvac_state: entity.attributes.mode,
       hvac_modes:entity.attributes.available_modes,
       preset_mode: entity.attributes.preset_mode,
       away: (entity.attributes.away_mode == 'on' ? true : false)
@@ -67,16 +67,16 @@ class DehumidifierCard extends HTMLElement {
     if (this.thermostat.dual) {
       if (this.thermostat.temperature.high != this._saved_state.target_temperature_high ||
         this.thermostat.temperature.low != this._saved_state.target_temperature_low)
-        this._hass.callService('climate', 'set_temperature', {
+        this._hass.callService('humidifier', 'set_humidity', {
           entity_id: this._config.entity,
           target_temp_high: this.thermostat.temperature.high,
           target_temp_low: this.thermostat.temperature.low,
         });
     } else {
       if (this.thermostat.temperature.target != this._saved_state.target_temperature)
-        this._hass.callService('climate', 'set_temperature', {
+        this._hass.callService('humidifier', 'set_humidity', {
           entity_id: this._config.entity,
-          temperature: this.thermostat.temperature.target,
+          humidity: this.thermostat.temperature.target,
         });
     }
   }
