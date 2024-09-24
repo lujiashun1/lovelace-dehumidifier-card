@@ -423,7 +423,7 @@ export default class ThermostatUI {
     console.log(mode);
     let config = this._config;
     if (this._timeoutHandlerMode) clearTimeout(this._timeoutHandlerMode);
-    hass.callService('climate', 'set_hvac_mode', {
+    hass.callService('humidifier', 'set_mode', {
       entity_id: this._config.entity,
       hvac_mode: mode,
     });
