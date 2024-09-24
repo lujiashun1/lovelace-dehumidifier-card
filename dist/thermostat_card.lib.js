@@ -415,6 +415,7 @@ export default class ThermostatUI {
     })
   }
 
+  
   openProp() {
     this._config.propWin(this.entity.entity_id)
   }
