@@ -403,25 +403,16 @@ export default class ThermostatUI {
       let icon;
       let mode = modes[i];
       switch (mode) {
-        case 'dry':
-          icon = 'water-percent';
+        case 'Smart':
+          icon = 'alpha-a-circle-outline';
           break;
-        case 'fan_only':
-          icon = 'fan';
+        case 'Sleep':
+          icon = 'power-sleep';
           break;
-        case 'cool':
-          icon = 'snowflake';
+        case 'Clothes Drying':
+          icon = 'tshirt-crew';
           break;
-        case 'heat':
-          icon = 'fire';
-          break;
-        case 'auto':
-          icon = 'atom';
-          break;
-        case 'heat_cool':
-          icon = 'sync';
-          break;
-        case 'off':
+        case 'Off':
           icon = 'power';
           break;
         default:
