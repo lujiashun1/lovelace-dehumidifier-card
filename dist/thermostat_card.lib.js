@@ -378,24 +378,29 @@ export default class ThermostatUI {
     for (var i = 0; i < modes.length; i++) {
       let icon;
       let mode = modes[i];
+      let color;
       switch (mode) {
         case 'Smart':
           icon = 'alpha-a-circle-outline';
+          color='cool';
           break;
         case 'Sleep':
           icon = 'power-sleep';
+          color='dry';
           break;
         case 'Clothes Drying':
           icon = 'tshirt-crew';
+          color='heat';
           break;
         case 'Off':
           icon = 'power';
+          color='off';
           break;
         default:
           icon = 'help';
       }
       let d = document.createElement('span');
-      d.innerHTML = `<ha-icon class="modeicon ${mode}" icon="mdi:${icon}"></ha-icon>`
+      d.innerHTML = `<ha-icon class="modeicon ${color}" icon="mdi:${icon}"></ha-icon>`
       d.addEventListener('click', (e) => this._setMode(e, mode, hass));
       //this._modes[i].push(d);
       this._modes_dialog.appendChild(d)
