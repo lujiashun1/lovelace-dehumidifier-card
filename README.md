@@ -7,7 +7,7 @@
  * @LastEditTime  : 2020-05-31 11:11:26
  -->
 
-# Lovelace Thermostat Card
+# D Card
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
 
