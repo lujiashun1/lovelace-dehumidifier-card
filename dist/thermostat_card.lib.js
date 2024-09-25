@@ -405,6 +405,16 @@ export default class ThermostatUI {
       //this._modes[i].push(d);
       this._modes_dialog.appendChild(d)
     }
+    let d1 = document.createElement('span');
+    d1.innerHTML = `<ha-icon class="modeicon" icon="mdi:lightbulb-on-outline"></ha-icon>`
+    d1.addEventListener('click', (e) => this._toggleLight(e, hass));
+    this._modes_dialog.appendChild(d1)
+
+    let d2 = document.createElement('span');
+    d2.innerHTML = `<ha-icon class="modeicon" icon="mdi:human-child"></ha-icon>`
+    d2.addEventListener('click', (e) => this._toggleLock(e, mode, hass));
+    this._modes_dialog.appendChild(d2)
+    
   }
   _buildCore(diameter) {
     return SvgUtil.createSVGElement('svg', {
@@ -439,6 +449,33 @@ export default class ThermostatUI {
     }, config.pending * 1000);
     e.stopPropagation();
   }
+
+  _toggleLight(e, hass) {
+    let config = this._config;
+    if (this._timeoutHandlerMode) clearTimeout(this._timeoutHandlerMode);
+    hass.callService('light', 'toggle', {
+      entity_id: this._config.light_entity,
+    });
+    this._modes_dialog.className = "dialog modes " + mode + " pending";
+    this._timeoutHandlerMode = setTimeout(() => {
+      this._modes_dialog.className = "dialog modes hide";
+    }, config.pending * 1000);
+    e.stopPropagation();
+  }
+
+  _toggleLock(e, hass) {
+    let config = this._config;
+    if (this._timeoutHandlerMode) clearTimeout(this._timeoutHandlerMode);
+    hass.callService('switch', 'toggle', {
+      entity_id: this._config.lock_entity,
+    });
+    this._modes_dialog.className = "dialog modes " + mode + " pending";
+    this._timeoutHandlerMode = setTimeout(() => {
+      this._modes_dialog.className = "dialog modes hide";
+    }, config.pending * 1000);
+    e.stopPropagation();
+  }
+  
   _load_icon(state, ic_name) {
 
     let ic_dot = 'dot_r'
