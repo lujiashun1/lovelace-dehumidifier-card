@@ -414,7 +414,7 @@ export default class ThermostatUI {
     let d2 = document.createElement('span');
     let color2=options.lock_state;
     d2.innerHTML = `<ha-icon class="modeicon ${color2}" icon="mdi:human-child"></ha-icon>`
-    d2.addEventListener('click', (e) => this._toggleLock(e, mode, hass));
+    d2.addEventListener('click', (e) => this._toggleLock(e, hass));
     this._modes_dialog.appendChild(d2)
     
   }
