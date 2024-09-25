@@ -99,8 +99,8 @@ class DehumidifierCard extends HTMLElement {
     
     if (root.lastChild) root.removeChild(root.lastChild);
     let humidifierName=config.entity.split(".")[1];
-    let index = str.lastIndexOf(humidifierName);
-    let entityPrefix=str.slice(0, index+1);
+    let index = humidifierName.lastIndexOf("_");
+    let entityPrefix=humidifierName.slice(0, index+1);
     // Prepare config defaults
     const cardConfig = deepClone(config);
     // cardConfig.hvac = Object.assign({}, config.hvac);
