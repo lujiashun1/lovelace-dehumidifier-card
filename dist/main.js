@@ -114,8 +114,8 @@ class DehumidifierCard extends HTMLElement {
     if (!cardConfig.chevron_size) cardConfig.chevron_size = 50;
     if (!cardConfig.num_ticks) cardConfig.num_ticks = 150;
     if (!cardConfig.tick_degrees) cardConfig.tick_degrees = 300;
-    if (!cardConfig.light_entity) cardConfig.light_entity = entityPrefix+"indicator_light";  
-    if (!cardConfig.lock_entity) cardConfig.lock_entity = entityPrefix+"physical_control_locked";
+    if (!cardConfig.light_entity) cardConfig.light_entity ="light."+ entityPrefix+"indicator_light";  
+    if (!cardConfig.lock_entity) cardConfig.lock_entity ="switch."+ entityPrefix+"physical_control_locked";
 
     // Extra config values generated for simplicity of updates
     cardConfig.radius = cardConfig.diameter / 2;
