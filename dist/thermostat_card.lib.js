@@ -189,7 +189,7 @@ export default class ThermostatUI {
     // this._updateColor(this.hvac_state, this.preset_mode);
     this._updateText('ambient', this.ambient);
     this._updateEdit(false);
-    this._updateDialog(this.hvac_modes, hass);
+    this._updateDialog(options,this.hvac_modes, hass);
   }
 
   _temperatureControlClicked(index) {
@@ -373,7 +373,7 @@ export default class ThermostatUI {
       });
     });
   }
-  _updateDialog(modes, hass) {
+  _updateDialog(options,modes, hass) {
     this._modes_dialog.innerHTML = "";
     for (var i = 0; i < modes.length; i++) {
       let icon;
@@ -406,12 +406,14 @@ export default class ThermostatUI {
       this._modes_dialog.appendChild(d)
     }
     let d1 = document.createElement('span');
-    d1.innerHTML = `<ha-icon class="modeicon" icon="mdi:lightbulb-on-outline"></ha-icon>`
+    let color1=options.light_state;
+    d1.innerHTML = `<ha-icon class="modeicon ${color1}" icon="mdi:lightbulb-on-outline"></ha-icon>`
     d1.addEventListener('click', (e) => this._toggleLight(e, hass));
     this._modes_dialog.appendChild(d1)
 
     let d2 = document.createElement('span');
-    d2.innerHTML = `<ha-icon class="modeicon" icon="mdi:human-child"></ha-icon>`
+    let color2=options.lock_state;
+    d2.innerHTML = `<ha-icon class="modeicon ${color2}" icon="mdi:human-child"></ha-icon>`
     d2.addEventListener('click', (e) => this._toggleLock(e, mode, hass));
     this._modes_dialog.appendChild(d2)
     
