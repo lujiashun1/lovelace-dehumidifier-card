@@ -91,7 +91,9 @@ class DehumidifierCard extends HTMLElement {
     const root = this.shadowRoot;
     
     if (root.lastChild) root.removeChild(root.lastChild);
-
+    let humidifierName=config.entity.split(".")[1];
+    let index = str.lastIndexOf(humidifierName);
+    let entityPrefix=str.slice(0, index+1);
     // Prepare config defaults
     const cardConfig = deepClone(config);
     // cardConfig.hvac = Object.assign({}, config.hvac);
@@ -105,6 +107,8 @@ class DehumidifierCard extends HTMLElement {
     if (!cardConfig.chevron_size) cardConfig.chevron_size = 50;
     if (!cardConfig.num_ticks) cardConfig.num_ticks = 150;
     if (!cardConfig.tick_degrees) cardConfig.tick_degrees = 300;
+    if (!cardConfig.light_entity) cardConfig.light_entity = entityPrefix+"indicator_light";  
+    if (!cardConfig.lock_entity) cardConfig.lock_entity = entityPrefix+"physical_control_locked";
 
     // Extra config values generated for simplicity of updates
     cardConfig.radius = cardConfig.diameter / 2;
