@@ -109,7 +109,7 @@ export default class ThermostatUI {
 
     // Only some states support dual temp adjustment, even if the hvac is generally dual capable
     let dual_state = (this.hvac_state == "heat_cool") || (this.hvac_state == "off")
-
+    let _class="";
     if (this.dual && dual_state) {
       tick_label = [this._low, this._high, this.ambient].sort();
       this._updateTemperatureSlot(null, 0, `temperature_slot_1`);
@@ -160,7 +160,7 @@ export default class ThermostatUI {
       tick_label = [this._target, this.ambient].sort();
       this._updateTemperatureSlot(tick_label[0], -8, `temperature_slot_1`);
       this._updateTemperatureSlot(tick_label[1], 8, `temperature_slot_2`);
-      let _class;
+      
       switch (this.hvac_state) {
         case 'Smart':
           this._load_icon('cool', 'alpha-a-circle-outline');
@@ -188,7 +188,7 @@ export default class ThermostatUI {
     }
 
     tick_label.forEach(item => tick_indexes.push(SvgUtil.restrictToRange(Math.round((item - this.min_value) / (this.max_value - this.min_value) * config.num_ticks), 0, config.num_ticks - 1)));
-    this._updateTicks(from, to, tick_indexes, 'heat');//this.hvac_state
+    this._updateTicks(from, to, tick_indexes, _class);//this.hvac_state
     // this._updateColor(this.hvac_state, this.preset_mode);
     this._updateText('ambient', this.ambient);
     this._updateEdit(false);
