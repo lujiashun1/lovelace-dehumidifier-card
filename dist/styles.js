@@ -11,6 +11,7 @@ export function cssData(user) {
     --heat_colorc: rgb(227, 99, 4, 1);
     --manual_color: #44739e;
     --off_color: #8a8a8a;
+    --on_color: #ff8c00;
     --fan_only_color: #D7DBDD;
     --dry_color: #efbd07;
     --idle_color: #808080;
@@ -43,6 +44,10 @@ export function cssData(user) {
   
   .off {
     --mode_color: var(--off_color);
+  }
+
+  .on {
+    --mode_color: var(--on_color);
   }
   .more {
     --mode_color: var(--off_color);
