@@ -173,10 +173,7 @@ export default class ThermostatUI {
         case 'Clothes Drying':
           this._load_icon('heat', 'tshirt-crew');
           _class="heat";
-          if (target_index <= ambient_index) {
-            from = target_index;
-            to = ambient_index;
-          }
+          
           break;
         case 'Off':
           this._load_icon('off', 'power');
@@ -186,10 +183,13 @@ export default class ThermostatUI {
           this._load_icon('more', 'progress-question');
       }
     }
-
+    if (target_index <= ambient_index) {
+        from = target_index;
+        to = ambient_index;
+    }
     tick_label.forEach(item => tick_indexes.push(SvgUtil.restrictToRange(Math.round((item - this.min_value) / (this.max_value - this.min_value) * config.num_ticks), 0, config.num_ticks - 1)));
     console.log("from:"+from+" to:"+to+" tick_indexes:"+tick_indexes+ " hvac_state:"+this.hvac_state+" class:"+_class);
-    this._updateTicks(from, to, tick_indexes, this.hvac_state);//this.hvac_state
+    this._updateTicks(from, to, tick_indexes, _class);//this.hvac_state
     // this._updateColor(this.hvac_state, this.preset_mode);
     this._updateText('ambient', this.ambient);
     this._updateEdit(false);
