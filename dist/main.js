@@ -9,11 +9,14 @@ class DehumidifierCard extends HTMLElement {
   set hass(hass) {
     const config = this._config;
     const entity = hass.states[config.entity];
+    const light_entity = hass.states[config.light_entity];
+    const lock_entity = hass.states[config.lock_entity];
     if(!entity)return;
     let ambient_humidity = entity.attributes.current_humidity || 0;
     
     let hvac_state = entity.attributes.mode;
-    
+    let light_state = light_entity.state;
+    let lock_state = lock_entity.state;
     const new_state = {
       entity: entity,
       min_value: entity.attributes.min_humidity,
@@ -23,6 +26,8 @@ class DehumidifierCard extends HTMLElement {
       target_temperature_low: entity.attributes.target_temp_low,
       target_temperature_high: entity.attributes.target_temp_high,
       hvac_state: entity.attributes.mode,
+      light_state:light_entity.state,
+      lock_state:lock_entity.state,
       hvac_modes:entity.attributes.available_modes,
       preset_mode: entity.attributes.preset_mode,
       away: (entity.attributes.away_mode == 'on' ? true : false)
@@ -37,7 +42,9 @@ class DehumidifierCard extends HTMLElement {
         this._saved_state.target_temperature_high != new_state.target_temperature_high ||
         this._saved_state.hvac_state != new_state.hvac_state ||
         this._saved_state.preset_mode != new_state.preset_mode ||
-        this._saved_state.away != new_state.away)) {
+        this._saved_state.away != new_state.away||
+        this._saved_state.light_state != new_state.light_state||
+        this._saved_state.lock_state != new_state.lock_state)) {
       this._saved_state = new_state;
       this.thermostat.updateState(new_state,hass);
      }
