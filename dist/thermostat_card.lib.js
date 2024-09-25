@@ -160,17 +160,19 @@ export default class ThermostatUI {
       tick_label = [this._target, this.ambient].sort();
       this._updateTemperatureSlot(tick_label[0], -8, `temperature_slot_1`);
       this._updateTemperatureSlot(tick_label[1], 8, `temperature_slot_2`);
-
+      let _class;
       switch (this.hvac_state) {
         case 'Smart':
           this._load_icon('cool', 'alpha-a-circle-outline');
+          _class="cool";
           break;
         case 'Sleep':
           this._load_icon('dry', 'power-sleep');
+          _class="dry";
           break;
         case 'Clothes Drying':
           this._load_icon('heat', 'tshirt-crew');
-
+          _class="heat";
           if (target_index <= ambient_index) {
             from = target_index;
             to = ambient_index;
@@ -178,6 +180,7 @@ export default class ThermostatUI {
           break;
         case 'Off':
           this._load_icon('off', 'power');
+          _class="off";
           break;
         default:
           this._load_icon('more', 'progress-question');
@@ -185,7 +188,7 @@ export default class ThermostatUI {
     }
 
     tick_label.forEach(item => tick_indexes.push(SvgUtil.restrictToRange(Math.round((item - this.min_value) / (this.max_value - this.min_value) * config.num_ticks), 0, config.num_ticks - 1)));
-    this._updateTicks(from, to, tick_indexes, this.hvac_state);
+    this._updateTicks(from, to, tick_indexes, _class);
     // this._updateColor(this.hvac_state, this.preset_mode);
     this._updateText('ambient', this.ambient);
     this._updateEdit(false);
