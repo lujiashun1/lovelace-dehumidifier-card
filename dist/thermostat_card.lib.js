@@ -458,7 +458,7 @@ export default class ThermostatUI {
     hass.callService('light', 'toggle', {
       entity_id: this._config.light_entity,
     });
-    this._modes_dialog.className = "dialog modes " + mode + " pending";
+    this._modes_dialog.className = "dialog modes light pending";
     this._timeoutHandlerMode = setTimeout(() => {
       this._modes_dialog.className = "dialog modes hide";
     }, config.pending * 1000);
@@ -471,7 +471,7 @@ export default class ThermostatUI {
     hass.callService('switch', 'toggle', {
       entity_id: this._config.lock_entity,
     });
-    this._modes_dialog.className = "dialog modes " + mode + " pending";
+    this._modes_dialog.className = "dialog modes lock pending";
     this._timeoutHandlerMode = setTimeout(() => {
       this._modes_dialog.className = "dialog modes hide";
     }, config.pending * 1000);
